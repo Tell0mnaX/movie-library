@@ -1,0 +1,14 @@
+# .NET
+ShowApp/bin/
+ShowApp/obj/
+ShowApp/*.db
+
+# Angular
+show-client/node_modules/
+show-client/dist/
+
+# Global
+*.user
+*.suo
+*.DS_Store
+.env
