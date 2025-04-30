@@ -1,0 +1,51 @@
+<div class="container mt-5">
+
+  <!-- ✅ Message de succès ici -->
+  <div *ngIf="successMessage" class="alert alert-success text-center">
+    {{ successMessage }}
+  </div>
+  
+  <h2 class="mb-4">✏️ Modifier la série</h2>
+
+  <p *ngIf="!show || !show.id">⏳ Chargement...</p>
+
+  <form *ngIf="show && show.id" (ngSubmit)="updateShow()" class="w-50 mx-auto">
+    
+    <div class="mb-3">
+      <label for="title" class="form-label">Titre</label>
+      <input [(ngModel)]="show.title" class="form-control" name="title" required />
+    </div>
+
+    <div class="mb-3">
+      <label for="creator" class="form-label">Créateur</label>
+      <input [(ngModel)]="show.creator" class="form-control" name="creator" required />
+    </div>
+
+    <div class="mb-3">
+      <label for="genre" class="form-label">Genre</label>
+      <input [(ngModel)]="show.genre" class="form-control" name="genre" />
+    </div>
+
+    <div class="mb-3">
+      <label for="seasons" class="form-label">Saisons</label>
+      <input type="number" [(ngModel)]="show.seasons" class="form-control" name="seasons" />
+    </div>
+
+    <div class="mb-4">
+      <label for="startYear" class="form-label">Année</label>
+      <input type="number" [(ngModel)]="show.startYear" class="form-control" name="startYear" />
+    </div>
+
+    <div class="mb-4">
+      <label for="rating" class="form-label">💘 Note</label>
+      <input type="double" [(ngModel)]="show.rating" class="form-control" name="rating" >
+    </div>
+
+    <div class="mb-3">
+      <label for="imageUrl" class="form-label">🖼️ Lien de l'image (URL)</label>
+      <input type="text" [(ngModel)]="show.imageUrl" class="form-control" name="imageUrl"/>
+    </div>
+
+    <button type="submit" class="btn btn-success w-100" [disabled]="isSubmitting">✅ Enregistrer</button>
+  </form>
+</div>

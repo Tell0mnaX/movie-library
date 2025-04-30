@@ -1,0 +1,60 @@
+<div class="container mt-5">
+  
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{ successMessage }}
+  </div>
+  
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <h1 class="text-center mb-5 text-light">📺 Bibliothèque de séries</h1>
+
+  <div class="d-flex flex-wrap gap-2 mb-4">
+    <a routerLink="/add" class="btn btn-primary mb-3">➕ Ajouter une nouvelle série</a>
+    <button (click)="getSortedShowsByYear()" class="btn btn-primary mb-3">Trier par année de sortie</button>
+    <button (click)="getTopShows()" class="btn btn-primary mb-3">Voir le top 5</button>
+  </div>
+
+  <div class="mb-3">
+    <label for="genreSelect" class="form-label">🎭 Filtrer par genre :</label>
+    <select id="genreSelect" class="form-select" [(ngModel)]="selectedGenre" (change)="filterByGenre()">
+      <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
+    </select>
+  </div>
+
+  <!-- Pour fair la recherche -->
+  <div class="mb-4">
+    <input
+    [(ngModel)]="searchKeyword"
+    (input)="onSearchInputChange()"
+    class="form-control"
+    placeholder="🔍 Rechercher une série par titre..."
+   />
+</div>
+
+<div *ngIf="isLoading" class="alert alert-info">
+  {{errorMessage}}
+</div>
+
+<div class="row justify-content-center g-4">
+  <div class="col-md-4" *ngFor="let show of shows">
+    <div class="card h-100 shadow card-hover">
+      <img [src]="show.imageUrl" class="card-img-top" alt="{{ show.title }}" style="height: 300px; object-fit: cover;">
+      <div class="card-body">
+        <h5 class="card-title">{{ show.title }}</h5>
+        <p class="card-text">
+          🎬 {{ show.creator }}<br>
+          📅 {{ show.startYear }}<br>
+          🎭 {{ show.genre }}<br>
+          ⭐ {{ show.rating }}/10
+        </p>
+        <div class="d-flex justify-content-between">
+          <button class="btn btn-sm btn-primary" [routerLink]="['/edit', show.id]">✏️ Modifier</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteShow(show.id)">🗑 Supprimer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
